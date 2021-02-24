@@ -139,13 +139,14 @@ class Bridge(object):
 	def export_csv(self):
 		raw = self.process_raw()
 		raw.to_csv('{}/{}.csv'.format(self.export_folder,'raw'))
-		self.process_secteurs().to_csv('{}/{}.csv'.format(self.export_folder,'secteurs'))
-		self.process_competences().to_csv('{}/{}.csv'.format(self.export_folder,'competences'))
-		self.process_typefinancements().to_csv('{}/{}.csv'.format(self.export_folder,'typefinancements'))
-		self.process_coutsfixes().to_csv('{}/{}.csv'.format(self.export_folder,'coutsfixes'))
-		self.process_repartitionlinear_secteurs().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearsecteur'))
-		self.process_repartitionlinear_competences().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcompetences'))
-		self.process_repartitionlinear_couts_fixes().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcoutsfixes'))
+		secteurs = self.process_secteurs().to_csv('{}/{}.csv'.format(self.export_folder,'secteurs'))
+		competences = self.process_competences().to_csv('{}/{}.csv'.format(self.export_folder,'competences'))
+		typefinancements = self.process_typefinancements().to_csv('{}/{}.csv'.format(self.export_folder,'typefinancements'))
+		coutsfixes = self.process_coutsfixes().to_csv('{}/{}.csv'.format(self.export_folder,'coutsfixes'))
+		repartitionlinear_secteurs = self.process_repartitionlinear_secteurs().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearsecteur'))
+		repartitionlinear_competences = self.process_repartitionlinear_competences().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcompetences'))
+		repartitionlinear_couts_fixes = self.process_repartitionlinear_couts_fixes().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcoutsfixes'))
+		return raw,secteurs,competences,typefinancements,coutsfixes,repartitionlinear_secteurs,repartitionlinear_competences,repartitionlinear_couts_fixes
 
 	def export_Bigquery(self, project_id = 'digital-africa-rainbow', dataset_id = 'DataStudio', if_exists = 'replace'):
 		bq = gcp.Bigquery_management()
