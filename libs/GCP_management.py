@@ -105,7 +105,7 @@ class Cloud_storage_management(object):
 
 
 class Bigquery_management(object):
-    def __init__(self, file_key= file_key):
+    def __init__(self, file_key= "/Users/mohamedkabadiabakhate/Downloads/digital-africa-rainbow-9a81b3086005.json"):
         """Iniatilise le client avec service account"""
         self.client = bigquery.Client.from_service_account_json(file_key)
         self.project = self.client.project

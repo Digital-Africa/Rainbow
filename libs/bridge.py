@@ -147,6 +147,26 @@ class Bridge(object):
 		self.process_repartitionlinear_competences().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcompetences'))
 		self.process_repartitionlinear_couts_fixes().to_csv('{}/{}.csv'.format(self.export_folder,'repartionlinearcoutsfixes'))
 
+	def export_Bigquery(self, project_id = 'digital-africa-rainbow', dataset_id = 'DataStudio', if_exists = 'replace'):
+		bq = gcp.Bigquery_management()
+		raw = self.process_raw()
+		secteurs = self.process_secteurs()
+		competences = self.process_competences()
+		typefinancements = self.process_typefinancements()
+		coutsfixes = self.process_coutsfixes()
+		repartitionlinear_secteurs = self.process_repartitionlinear_secteurs()
+		repartitionlinear_competences = self.process_repartitionlinear_competences()
+		repartitionlinear_couts_fixes = self.process_repartitionlinear_couts_fixes()
+		bq.upload_dataframe(df = raw, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_Raw', if_exists = if_exists)		
+		bq.upload_dataframe(df = secteurs, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_secteurs', if_exists = if_exists)
+		bq.upload_dataframe(df = competences, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_competences', if_exists = if_exists)
+		bq.upload_dataframe(df = typefinancements, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_typefinancements', if_exists = if_exists)
+		bq.upload_dataframe(df = coutsfixes, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_coutsfixes', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_secteurs, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_secteurs', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_competences, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_competences', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_couts_fixes, project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_couts_fixes', if_exists = if_exists)
+
+
 	def export_Gsheet():
 		export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge'
 		raw = process_raw(raw_data)
@@ -159,17 +179,6 @@ class Bridge(object):
 		process_repartitionlinear_competences(raw).to_csv('{}/{}.csv'.format(export_folder,'repartionlinearcompetences'))
 		process_repartitionlinear_couts_fixes(raw).to_csv('{}/{}.csv'.format(export_folder,'repartionlinearcoutsfixes'))
 
-	def export_Bigquery():
-		export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge'
-		raw = process_raw(raw_data)
-		raw.to_csv('{}/{}.csv'.format(export_folder,'raw'))
-		process_secteurs(raw).to_csv('{}/{}.csv'.format(export_folder,'secteurs'))
-		process_competences(raw).to_csv('{}/{}.csv'.format(export_folder,'competences'))
-		process_typefinancements(raw).to_csv('{}/{}.csv'.format(export_folder,'typefinancements'))
-		process_coutsfixes(raw).to_csv('{}/{}.csv'.format(export_folder,'coutsfixes'))
-		process_repartitionlinear_secteurs(raw).to_csv('{}/{}.csv'.format(export_folder,'repartionlinearsecteur'))
-		process_repartitionlinear_competences(raw).to_csv('{}/{}.csv'.format(export_folder,'repartionlinearcompetences'))
-		process_repartitionlinear_couts_fixes(raw).to_csv('{}/{}.csv'.format(export_folder,'repartionlinearcoutsfixes'))
 
 	def export_Gstorage():
 		export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge'
