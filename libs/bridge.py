@@ -157,15 +157,15 @@ class Bridge(object):
 		repartitionlinear_secteurs = self.process_repartitionlinear_secteurs()
 		repartitionlinear_competences = self.process_repartitionlinear_competences()
 		repartitionlinear_couts_fixes = self.process_repartitionlinear_couts_fixes()
-		bq.upload_dataframe(df = raw.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_Raw', if_exists = if_exists)		
-		bq.upload_dataframe(df = secteur.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_secteurs', if_exists = if_exists)
-		bq.upload_dataframe(df = competences.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_competences', if_exists = if_exists)
-		bq.upload_dataframe(df = typefinancements.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_typefinancements', if_exists = if_exists)
-		bq.upload_dataframe(df = coutsfixes.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_coutsfixes', if_exists = if_exists)
-		bq.upload_dataframe(df = repartitionlinear_secteurs.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_secteurs', if_exists = if_exists)
-		bq.upload_dataframe(df = repartitionlinear_competences.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_competences', if_exists = if_exists)
-		bq.upload_dataframe(df = repartitionlinear_couts_fixes.reset_idex(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_couts_fixes', if_exists = if_exists)
-
+		bq.upload_dataframe(df = raw.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_Raw', if_exists = if_exists)		
+		bq.upload_dataframe(df = secteurs.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_secteurs', if_exists = if_exists)
+		bq.upload_dataframe(df = competences.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_competences', if_exists = if_exists)
+		bq.upload_dataframe(df = typefinancements.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_typefinancements', if_exists = if_exists)
+		bq.upload_dataframe(df = coutsfixes.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_coutsfixes', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_secteurs.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_secteurs', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_competences.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_competences', if_exists = if_exists)
+		bq.upload_dataframe(df = repartitionlinear_couts_fixes.reset_index(), project_id = project_id, dataset_id = dataset_id, table_id ='Bridge_repartitionlinear_couts_fixes', if_exists = if_exists)
+		return raw,secteurs,competences,typefinancements,coutsfixes,repartitionlinear_secteurs,repartitionlinear_competences,repartitionlinear_couts_fixes
 
 	def export_Gsheet():
 		export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge'
