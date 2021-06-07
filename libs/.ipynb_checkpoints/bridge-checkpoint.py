@@ -16,7 +16,7 @@ class Bridge(object):
 	def __init__(self, input_file):
 		super(Bridge, self).__init__()
 		self.local = "/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/Raw"
-		self.batch_0 = ["bridges-07-01-2021 15-30-30.xlsx","bridges-29-01-2021 10-50-31.xlsx","bridges-09-02-2021 08-18-47.xlsx","bridges-29-01-2021 10-50-31.xlsx"]
+		self.batch_0 = ["bridges-07-01-2021 15-30-30.xlsx","bridges-29-01-2021 10-50-31.xlsx","bridges-09-02-2021 08-18-47.xlsx"]
 		self.input_file = input_file
 		self.raw = pandas.read_excel('{}/{}'.format(self.local, self.input_file))
 		self.export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge/test'
