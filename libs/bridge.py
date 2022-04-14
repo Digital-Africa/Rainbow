@@ -8,6 +8,7 @@ import string
 import datetime
 import libs.GCP_management as gcp
 from dateutil.relativedelta import relativedelta
+import pandas_gbq
 
 
 
@@ -20,6 +21,7 @@ class Bridge(object):
 		self.input_file = input_file
 		self.raw = pandas.read_excel('{}/{}'.format(self.local, self.input_file))
 		self.export_folder = '/Users/mohamedkabadiabakhate/Documents/Rainbow/Data/DataStudio/Bridge/test'
+		self.countrytable = pandas_gbq.read_gbq("""SELECT * from `External.Lookup_table_country`""", project_id="digital-africa-rainbow", location = "EU")
 
 	def norm_key(self, element):
 		#lower()
@@ -37,8 +39,19 @@ class Bridge(object):
 		return difference_in_years
 
 	def process_raw(self):
+
+		country = self.countrytable[['name', 'fr_name']]
+
+		def norm_countryname(element):
+			en = country[country['name']== element].values.tolist()
+			fr = country[country['fr_name']== element].values.tolist()
+			if len(en) == 1:  
+				return en[0][1]
+			else:
+				return element
 		raw = self.raw
 		raw['key'] = raw['Startup'].map(self.norm_key) + raw['Site web'].map(self.norm_key)
+		raw["Siege"] = raw["Siege"].map(norm_countryname)
 		raw = raw[raw['key'].isin(set(e for e in raw['key'] if 'test' not in e))].copy()
 		raw['proportion CA Afr'] = raw["Chiffre d'affaire (Afrique)"].map(lambda x: float(x) if x!= ''  and x==x else 0)*100/raw["Chiffre d'affaire"].map(lambda x: float(x) if x!= '' and x== x else 0)
 		raw['ancien'] = raw["Début de l'activité"].map(self.ancien)
