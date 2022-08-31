@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 from google.cloud.storage import Blob
 
 
-file_key = "/Users/mohamedkabadiabakhate/Downloads/digital-africa-rainbow-9a81b3086005.json"
+file_key = "/Users/mohamedkabadiabakhate/Downloads/Keys services account/digital-africa-rainbow-9a81b3086005.json"
 
 
 class Cloud_storage_management(object):
@@ -105,7 +105,7 @@ class Cloud_storage_management(object):
 
 
 class Bigquery_management(object):
-    def __init__(self, file_key= "/Users/mohamedkabadiabakhate/Downloads/digital-africa-rainbow-9a81b3086005.json"):
+    def __init__(self, file_key= file_key):
         """Iniatilise le client avec service account"""
         self.client = bigquery.Client.from_service_account_json(file_key)
         self.project = self.client.project
